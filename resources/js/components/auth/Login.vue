@@ -1,110 +1,54 @@
 <template>
-<div class="flex h-screen w-full bg-slate-100">
-
-    <!-- PANEL INSTITUCIONAL -->
-    <div class="hidden lg:flex w-1/2 relative bg-[linear-gradient(45deg,_var(--primary)_20%,_var(--primary-light)_80%)] text-white flex-col justify-between p-16">
-
-        <div class="flex items-center gap-4">
-            <img src="/img/montearagon.png" class="h-14"/>
-            <div>
-                <h1 class="text-xl font-semibold">Residencia CPIFP Montearagón</h1>
-                <p class="text-sm opacity-80">Sistema de gestión residencial</p>
-            </div>
-        </div>
-
-        <div class="max-w-md space-y-6">
-            <h2 class="text-3xl font-bold leading-tight">
-                Plataforma de gestión
-                para residentes,
-                familiares y administración
-            </h2>
-
-            <p class="text-sm opacity-90">
-                Gestiona habitaciones, asistencia a comedor,
-                incidencias y datos de alumnos desde un
-                entorno centralizado y seguro.
-            </p>
-        </div>
-
-        <div class="text-xs opacity-70">
-            © {{ new Date().getFullYear() }} CPIFP Montearagón
-        </div>
-
-    </div>
-
-
-    <!-- PANEL LOGIN -->
-    <div
-        class="flex flex-col justify-center items-center w-full lg:w-1/2 p-10
-        bg-[linear-gradient(45deg,_var(--primary)_20%,_var(--primary-light)_80%)]
-        lg:bg-none lg:bg-gray-50"
+<AuthTemplate
+    title="Iniciar sesión"
+    subtitle="Accede con tu cuenta."
+>
+    <Form
+        :validation-schema="validationSchema"
+        ref="form"
+        @submit="login"
+        @keyup.enter="login"
+        class="space-y-5"
     >
+        <StyledInputText
+            name="email"
+            v-model="credentials.email"
+            type="email"
+            placeholder="correo@centro.es"
+            :rules="validationRules.email"
+        />
 
-        <div class="w-full max-w-md bg-white p-10 rounded-2xl shadow-xl">
+        <StyledInputText
+            name="password"
+            v-model="credentials.password"
+            type="password"
+            placeholder="Contraseña"
+            :rules="validationRules.password"
+        />
 
-            <!-- HEADER -->
-            <div class="flex flex-col items-center mb-8">
-                <h2 class="text-lg font-bold text-slate-800 uppercase">
-                    Acceso al sistema
-                </h2>
-                <p class="text-sm text-slate-500">
-                    Introduce tus credenciales
-                </p>
-            </div>
-
-            <Form
-                :validation-schema="validationSchema"
-                ref="form"
-                @submit="login"
-                @keyup.enter="login"
-                class="space-y-6"
+        <div class="flex justify-center">
+            <button
+                type="button"
+                class="text-sm font-semibold text-primary transition hover:text-primary-dark hover:underline"
+                @click="redirectToResetPassword"
             >
-
-                <StyledInputText
-                    name="email"
-                    v-model="credentials.email"
-                    type="email"
-                    placeholder="correo@centro.es"
-                    :rules="validationRules.email"
-                />
-
-                <StyledInputText
-                    name="password"
-                    v-model="credentials.password"
-                    type="password"
-                    placeholder="Contraseña"
-                    :rules="validationRules.password"
-                />
-
-                <div class="flex justify-center">
-                    <label
-                        class="text-primary hover:text-primary-light cursor-pointer flex text-sm hover:underline"
-                        @click="redirectToResetPassword"
-                    >
-                        He olvidado mi contraseña
-                    </label>
-                </div>
-
-                <p v-if="showErrors" class="text-sm font-semibold text-red-500">
-                    Credenciales incorrectas
-                </p>
-
-                <button
-                    type="submit"
-                    class="relative block w-full py-2 px-3 border border-transparent rounded-md bg-primary hover:bg-primary-light focus:outline-none focus:shadow-outline"
-                >
-                    <span class="text-sm leading-6 font-semibold text-white tracking-wide">
-                        INICIAR SESIÓN
-                    </span>
-                </button>
-
-            </Form>
-
+                ¿Has olvidado tu contraseña?
+            </button>
         </div>
 
-    </div>
+        <p v-if="showErrors" class="rounded-md bg-red-50 px-3 py-2 text-sm font-semibold text-red-600">
+            Credenciales incorrectas.
+        </p>
 
-</div>
+        <ButtonAction
+            label="Entrar"
+            color="primary"
+            size="md"
+            customClass="w-full uppercase"
+            @action="login"
+        />
+    </Form>
+</AuthTemplate>
 </template>
 
 <script>

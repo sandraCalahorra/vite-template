@@ -1,106 +1,51 @@
 <template>
-<div class="flex h-screen w-full bg-slate-100">
-
-    <!-- PANEL INSTITUCIONAL -->
-    <div class="hidden lg:flex w-1/2 relative bg-[linear-gradient(45deg,_var(--primary)_20%,_var(--primary-light)_80%)] text-white flex-col justify-between p-16">
-
-        <div class="flex items-center gap-4">
-            <img src="/img/montearagon.png" class="h-14"/>
-            <div>
-                <h1 class="text-xl font-semibold">Residencia CPIFP Montearagón</h1>
-                <p class="text-sm opacity-80">Sistema de gestión residencial</p>
-            </div>
-        </div>
-
-        <div class="max-w-md space-y-6">
-            <h2 class="text-3xl font-bold leading-tight">
-                Plataforma de gestión
-                para residentes,
-                familiares y administración
-            </h2>
-
-            <p class="text-sm opacity-90">
-                Gestiona habitaciones, asistencia a comedor,
-                incidencias y datos de alumnos desde un
-                entorno centralizado y seguro.
-            </p>
-        </div>
-
-        <div class="text-xs opacity-70">
-            © {{ new Date().getFullYear() }} CPIFP Montearagón
-        </div>
-
-    </div>
-
-
-    <!-- PANEL RESET PASSWORD -->
-    <div
-        class="flex flex-col justify-center items-center w-full lg:w-1/2 p-10
-        bg-[linear-gradient(45deg,_var(--primary)_20%,_var(--primary-light)_80%)]
-        lg:bg-none lg:bg-gray-50"
+<AuthTemplate
+    title="Restablecer contraseña"
+    subtitle="Escribe una nueva contraseña."
+    eyebrow="Nueva contraseña"
+>
+    <Form
+        :validation-schema="validationSchema"
+        ref="form"
+        @submit="submitForm"
+        @keyup.enter="submitForm"
+        class="space-y-5"
     >
+        <StyledInputText
+            name="password"
+            v-model="credentials.password"
+            :type="!is_enabled ? 'password' : 'text'"
+            placeholder="Nueva contraseña"
+            :rules="validationRules.password"
+        />
 
-        <div class="w-full max-w-md bg-white p-10 rounded-2xl shadow-xl">
+        <StyledInputText
+            name="password_confirmation"
+            v-model="credentials.password_confirmation"
+            :type="!is_enabled ? 'password' : 'text'"
+            placeholder="Confirmar contraseña"
+            :rules="validationRules.password_confirmation"
+        />
 
-            <!-- HEADER -->
-            <div class="flex flex-col items-center mb-8">
-                <h2 class="text-lg font-bold text-slate-800 uppercase text-center">
-                    Restablecer contraseña
-                </h2>
-                <p class="text-sm text-slate-500 text-center">
-                    Introduce tu nueva contraseña a continuación.
-                </p>
-            </div>
+        <ButtonAction
+            label="Restablecer contraseña"
+            color="primary"
+            size="md"
+            customClass="w-full uppercase"
+            @action="submitForm"
+        />
 
-            <Form
-                :validation-schema="validationSchema"
-                ref="form"
-                @submit="submitForm"
-                @keyup.enter="submitForm"
-                class="space-y-6"
+        <div class="flex justify-center">
+            <button
+                type="button"
+                class="text-sm font-semibold text-primary transition hover:text-primary-dark hover:underline"
+                @click="redirectToLogin"
             >
-
-                <StyledInputText
-                    name="password"
-                    v-model="credentials.password"
-                    :type="!is_enabled ? 'password' : 'text'"
-                    placeholder="Nueva contraseña"
-                    :rules="validationRules.password"
-                />
-
-                <StyledInputText
-                    name="password_confirmation"
-                    v-model="credentials.password_confirmation"
-                    :type="!is_enabled ? 'password' : 'text'"
-                    placeholder="Confirmar contraseña"
-                    :rules="validationRules.password_confirmation"
-                />
-
-                <div class="flex justify-center">
-                    <label
-                        class="text-primary hover:text-primary-light cursor-pointer flex text-sm hover:underline"
-                        @click="redirectToLogin"
-                    >
-                        Volver a Login {{ automaticRedirectMessage }}
-                    </label>
-                </div>
-
-                <button
-                    type="submit"
-                    class="relative block w-full py-2 px-3 border border-transparent rounded-md bg-primary hover:bg-primary-light focus:outline-none focus:shadow-outline"
-                >
-                    <span class="text-sm leading-6 font-semibold text-white tracking-wide uppercase">
-                        Restablecer Contraseña
-                    </span>
-                </button>
-
-            </Form>
-
+                Volver al login {{ automaticRedirectMessage }}
+            </button>
         </div>
-
-    </div>
-
-</div>
+    </Form>
+</AuthTemplate>
 </template>
 
 <script>

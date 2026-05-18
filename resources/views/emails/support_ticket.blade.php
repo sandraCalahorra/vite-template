@@ -33,7 +33,7 @@
     .logo {
         width: 160px;
         height: 50px;
-        background: url('https://montearagon.com/img/montearagon.png') center / contain no-repeat;
+        background: url('https://template.com/img/template.png') center / contain no-repeat;
     }
 
     .card {
@@ -131,7 +131,7 @@
                         <td class="card-body">
 
                             <h1>Nueva consulta de soporte</h1>
-                            <p>Se ha recibido un nuevo ticket desde el formulario de contacto de <strong>Residencias Montearagón</strong>.</p>
+                            <p>Se ha recibido un nuevo ticket desde el formulario de contacto de <strong>Template</strong>.</p>
 
                             <!-- Datos remitente -->
                             <div class="info-box">
@@ -180,7 +180,7 @@
         <!-- Footer -->
         <tr>
             <td class="footer">
-                <p>© {{ date('Y') }} Residencias Montearagón · Todos los derechos reservados</p>
+                <p>© {{ date('Y') }} Template · Todos los derechos reservados</p>
             </td>
         </tr>
     </table>

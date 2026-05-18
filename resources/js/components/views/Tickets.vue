@@ -192,7 +192,7 @@
 
 
         <!-- Delete Confirmation Modal -->
-        <TheModal :open="isDeleteModalOpen" title="ELIMINAR INCIDENCIA" @close="isDeleteModalOpen = false">
+        <TheModal :open="isDeleteModalOpen" title="ELIMINAR INCIDENCIA" destructive @close="isDeleteModalOpen = false">
             <template #body>
                 <div class="flex flex-col items-center text-center gap-4 py-4">
                     <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-600">

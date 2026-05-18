@@ -1,6 +1,6 @@
 <template>
     <div class="text-primary-900 font-medium tracking-wide justify-center opacity-60 hover:opacity-70 mix-blend-lighten text-sm cursor-pointer" @click="checkVersion ? openModal() : ''">
-        Montearagón v{{$package.version}}
+        Template v{{$package.version}}
     </div>
 
 </template>

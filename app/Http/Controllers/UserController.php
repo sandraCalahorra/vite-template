@@ -30,22 +30,6 @@ class UserController extends Controller
             $user->where("users.level", $request->role);
         }
 
-        $user_object = $request->attributes->get('user_object');
-
-        // restrict level access
-        if ($user_object->level) {
-            if($user_object->level >= 30) {
-                $user->where('users.level', $user_object->level);
-            } else if($user_object->level == 21) {
-                $user->where('users.level', ">", $user_object->level);
-            } else if ($user_object->level >= 10) {
-                $user->where('users.level', ">=", $user_object->level);
-                if ($user_object->level >= 20) $user->where('users.level', "!=", 21);
-            }
-        } else if (!$user_object) {
-            $user->where("users.id", 0);
-        }
-
         /* Get all users, then order the collection */
         $allUsers = $user->get();
 
@@ -80,20 +64,6 @@ class UserController extends Controller
         $allUsers = User::select("users.*", DB::raw("roles.name as role_name"))->leftJoin('roles','roles.level', 'users.level');
 
         $user_object = $request->attributes->get('user_object');
-
-        // restrict level access
-        if ($user_object->level) {
-            if($user_object->level >= 30) {
-                $allUsers->where('users.level', $user_object->level);
-            } else if($user_object->level == 21) {
-                $allUsers->where('users.level', ">", $user_object->level);
-            } else if ($user_object->level >= 10) {
-                $allUsers->where('users.level', ">=", $user_object->level);
-                if ($user_object->level >= 20) $allUsers->where('users.level', "!=", 21);
-            }
-        } else if (!$user_object) {
-            $allUsers->where("users.id", 0);
-        }
 
         $orderedData = $allUsers->get()->sortBy('name', SORT_NATURAL)->values();
         return $orderedData;

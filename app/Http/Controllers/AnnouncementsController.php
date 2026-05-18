@@ -69,7 +69,7 @@ class AnnouncementsController extends Controller
         }
 
         $user_object = $request->attributes->get('user_object');
-        if (!$user_object || ($user_object->level && $user_object->level >= 30)) {
+        if (!$user_object || ($user_object->level && $user_object->level >= 20)) {
             return response()->json(['error' => 'Not allowed, nice try :)'], 401);
         }
 
@@ -89,7 +89,7 @@ class AnnouncementsController extends Controller
         $restrict = 'Not allowed, nice try :)';
         $user_object = $request->attributes->get('user_object');
 
-        if ($user_object->level && $user_object->level >= 30) {
+        if ($user_object->level && $user_object->level >= 20) {
             return response()->json(['error' => $restrict], 401);
         } else if (!$user_object) {
             return response()->json(['error' => $restrict], 401);
@@ -126,7 +126,7 @@ class AnnouncementsController extends Controller
     public function deleteAnnouncements(Request $request)
     {
         $user_object = $request->attributes->get('user_object');
-        if (!$user_object || ($user_object->level && $user_object->level >= 30)) {
+        if (!$user_object || ($user_object->level && $user_object->level >= 20)) {
             return response()->json(['error' => 'Not allowed, nice try :)'], 401);
         }
 

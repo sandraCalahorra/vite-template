@@ -89,6 +89,7 @@
                                     </div>
 
                                     <button
+                                        v-if="canManageStatus"
                                         type="button"
                                         @click.stop="$emit('resend-email', ticket)"
                                         class="px-2 py-0.5 bg-red-50 text-red-600 text-[10px] font-bold uppercase rounded border border-red-200 hover:bg-red-100 transition-colors"

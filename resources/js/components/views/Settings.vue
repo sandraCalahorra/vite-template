@@ -5,14 +5,10 @@
 
         <Section v-show="!isLoading">
 
-                <!-- Section: Announcements -->
-                <div class="flex flex-col gap-3">
-                    <div class="flex items-center gap-2 border-b border-gray-50 pb-2">
-                        <div class="p-1 bg-primary/5 text-primary rounded-lg">
-                            <IconAnnouncement class="w-5 h-5"/>
-                        </div>
-                        <h2 class="text-sm font-bold text-gray-700 tracking-wider uppercase">Gestión de Anuncios</h2>
-                    </div>
+                <FormSection label="Gestión de Anuncios" collapsible v-if="$can('announcements', 'view')">
+                    <template #icon>
+                        <IconAnnouncement class="w-5 h-5" />
+                    </template>
 
                     <div class="flex flex-col gap-4">
                         <FilterControls
@@ -47,7 +43,7 @@
                             :perPage="Number(currentAnnouncementsPagination(1)['per_page'])"
                         />
                     </div>
-                </div>
+                </FormSection>
                 <TheModal
                     :open="isAnnouncementModalOpen"
                     :title="newItem.id == undefined ? 'CREAR ANUNCIO' : `ACTUALIZAR ANUNCIO`"
@@ -128,7 +124,7 @@
                     </template>
                 </TheModal>
 
-                <TheModal :open="isDeleteAnnouncementsModalOpen" title="Borrar Anuncio" @close="isDeleteAnnouncementsModalOpen = false">
+                <TheModal :open="isDeleteAnnouncementsModalOpen" title="Borrar Anuncio" destructive @close="isDeleteAnnouncementsModalOpen = false">
                     <template #body>
                         <p class="pr-8 leading-7 tracking-wide text-gray-800">
                             SE VA A ELIMINAR ESTE ANUNCIO
@@ -205,7 +201,7 @@
 
             datatableAnnouncementsActions() {
                 const array = [];
-                if (this.user?.level < 30) {
+                if (this.user?.level <= 20) {
                     array.push('delete');
                 }
                 return array;

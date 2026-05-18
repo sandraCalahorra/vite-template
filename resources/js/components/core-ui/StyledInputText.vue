@@ -18,6 +18,7 @@
                 :tabindex="tabindex"
                 :disabled="disabled"
                 @input="updateValue($event.target.value)"
+                @paste="handlePaste"
                 @focus="handleFocus"
                 @blur="handleBlur"
             />
@@ -30,7 +31,7 @@
             </div>
         </div>
 
-        <ErrorMessage class="error-message" :name="name" />
+        <ErrorMessage v-if="!hideErrors" class="error-message" :name="name" />
     </div>
 </template>
 
@@ -93,6 +94,22 @@ export default defineComponent({
         type: String,
         default: '0',
         },
+        trimWhitespace: {
+        type: Boolean,
+        default: false,
+        },
+        stripWhitespace: {
+        type: Boolean,
+        default: false,
+        },
+        lowercase: {
+        type: Boolean,
+        default: false,
+        },
+        hideErrors: {
+        type: Boolean,
+        default: false,
+        },
     },
 
     setup(props, { emit }) {
@@ -127,8 +144,41 @@ export default defineComponent({
             isPasswordVisible.value = !isPasswordVisible.value;
         };
 
+        const whitespacePattern = /[\s\u00A0\u1680\u180E\u2000-\u200D\u2028\u2029\u202F\u205F\u3000\uFEFF]+/g;
+        const edgeWhitespacePattern = /^[\s\u00A0\u1680\u180E\u2000-\u200D\u2028\u2029\u202F\u205F\u3000\uFEFF]+|[\s\u00A0\u1680\u180E\u2000-\u200D\u2028\u2029\u202F\u205F\u3000\uFEFF]+$/g;
+
+        const normalizeValue = (value) => {
+            let normalized = String(value ?? '');
+
+            if (props.stripWhitespace) {
+                normalized = normalized.replace(whitespacePattern, '');
+            } else if (props.trimWhitespace) {
+                normalized = normalized.replace(edgeWhitespacePattern, '');
+            }
+
+            return props.lowercase ? normalized.toLowerCase() : normalized;
+        };
+
         const updateValue = (value) => {
-            emit('update:modelValue', value);
+            emit('update:modelValue', normalizeValue(value));
+        };
+
+        const handlePaste = (event) => {
+            if (!props.stripWhitespace && !props.trimWhitespace && !props.lowercase) {
+                return;
+            }
+
+            event.preventDefault();
+
+            const pastedText = event.clipboardData?.getData('text') ?? '';
+            const target = event.target;
+            const start = target.selectionStart ?? target.value.length;
+            const end = target.selectionEnd ?? target.value.length;
+            const nextValue = `${target.value.slice(0, start)}${pastedText}${target.value.slice(end)}`;
+            const normalized = normalizeValue(nextValue);
+
+            target.value = normalized;
+            emit('update:modelValue', normalized);
         };
 
         const handleFocus = () => {
@@ -150,6 +200,8 @@ export default defineComponent({
         isPasswordVisible,
         handleFocus,
         handleBlur,
+        normalizeValue,
+        handlePaste,
     };
   },
 });

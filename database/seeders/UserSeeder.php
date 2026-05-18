@@ -16,13 +16,7 @@ class UserSeeder extends Seeder
     {
         DB::table('roles')->insert(
             [
-            'name' => 'Familiar',
-            'level' => '30',
-            ]
-        );
-        DB::table('roles')->insert(
-            [
-            'name' => 'Estudiante',
+            'name' => 'User',
             'level' => '20',
             ]
         );
@@ -40,8 +34,8 @@ class UserSeeder extends Seeder
         );
         DB::table('users')->insert(
             [
-            'name' => 'Sandra Calahorra',
-            'email' => 'sandracalahorra@ecomputer.es',
+            'name' => 'Superadministrador',
+            'email' => 'superadmin@ecomputer.es',
             'password' => Hash::make('1234'),
             'level' => '0',
             ]
@@ -56,18 +50,10 @@ class UserSeeder extends Seeder
         );
         DB::table('users')->insert(
             [
-            'name' => 'Estudiante',
-            'email' => 'estudiante@ecomputer.es',
+            'name' => 'Usuario',
+            'email' => 'user@ecomputer.es',
             'password' => Hash::make('1234'),
             'level' => '20',
-            ]
-        );
-        DB::table('users')->insert(
-            [
-            'name' => 'Familiar',
-            'email' => 'familiar@ecomputer.es',
-            'password' => Hash::make('1234'),
-            'level' => '30',
             ]
         );
     }

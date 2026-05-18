@@ -25,7 +25,16 @@
         </div>
 
       <!-- Content that expands or collapses with sliding and fading effect -->
-        <transition name="dropdown" appear @before-enter="beforeEnter" @enter="enter" @leave="leave">
+        <transition
+            name="dropdown"
+            appear
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter"
+            @before-leave="beforeLeave"
+            @leave="leave"
+            @after-leave="afterLeave"
+        >
             <div v-show="isExpanded" ref="content" class="flex flex-col mt-0 overflow-hidden">
                 <slot />
             </div>
@@ -55,18 +64,42 @@
             this.isExpanded = !this.isExpanded;
         },
         beforeEnter(el) {
+            el.style.transition = '';
+            el.style.overflow = 'hidden';
             el.style.maxHeight = '0';
             el.style.opacity = '0.6';
         },
         enter(el) {
             el.style.transition = 'max-height 0.15s ease, opacity 0.15s ease';
-            el.style.maxHeight = el.scrollHeight + 'px';
+            requestAnimationFrame(() => {
+                el.style.maxHeight = `${el.scrollHeight}px`;
+                el.style.opacity = '1';
+            });
+        },
+        afterEnter(el) {
+            el.style.transition = '';
+            el.style.maxHeight = 'none';
+            el.style.opacity = '';
+            el.style.overflow = '';
+        },
+        beforeLeave(el) {
+            el.style.transition = '';
+            el.style.overflow = 'hidden';
+            el.style.maxHeight = `${el.scrollHeight}px`;
             el.style.opacity = '1';
         },
         leave(el) {
             el.style.transition = 'max-height 0.15s ease, opacity 0.15s ease';
-            el.style.maxHeight = '0';
-            el.style.opacity = '0.6';
+            requestAnimationFrame(() => {
+                el.style.maxHeight = '0';
+                el.style.opacity = '0.6';
+            });
+        },
+        afterLeave(el) {
+            el.style.transition = '';
+            el.style.maxHeight = '';
+            el.style.opacity = '';
+            el.style.overflow = '';
         },
     },
   };

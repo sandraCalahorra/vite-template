@@ -2,34 +2,30 @@
     <router-link
         :to="to"
         :title="!isNavbarOpen ? text : null"
-        class="flex items-center min-w-0 gap-2 font-normal uppercase transition-all duration-200 transform focus:outline-none p-3 "
-        :class="[{
+        class="flex min-w-0 items-center gap-2.5 px-3 font-normal uppercase leading-none transition-all duration-200 transform focus:outline-none"
+        :class="{
             'router-link-is-active text-primary': routeMatches,
-            'bg-white text-primary hover:bg-primary-300 hover:text-white': isSubRoute,
-            'bg-white hover:text-primary': !isSubRoute && active !== '' && active === $route.path || ($route.path === '/' && active === '/'),
-            'text-white hover:text-white hover:bg-primary-300': !isSubRoute && active !== '' && active !== $route.path && !($route.path === '/' && active === '/'),
+            'bg-white text-primary hover:bg-gradient-to-bl hover:from-primary-light hover:to-primary hover:text-white': isSubRoute,
+            'text-white hover:text-white hover:bg-gradient-to-bl hover:from-primary-light hover:to-primary': !isSubRoute && !routeMatches && active !== '',
         },
-        size !== 'mobile' && !isNavbarOpen ? 'justify-center py-3' : 'justify-start',
-        size != 'mobile' && isNavbarOpen ? 'py-2' : '']"
+        [
+            size !== 'mobile' && !isNavbarOpen ? 'justify-center py-3' : 'justify-start py-2.5',
+        ]"
     >
         <!-- Icon wrapper -->
         <div
-            class="flex items-center justify-center shrink-0"
-            :class="{
-                'size-6' : size == 'mobile' || !isNavbarOpen,
-                'size-5 min-w-5 xl:size-4 xl:min-w-4' : size != 'mobile' && isNavbarOpen
-            }"
+            class="flex size-5 shrink-0 items-center justify-center leading-none [&>svg]:block [&>svg]:size-5"
         >
             <slot />
         </div>
 
         <!-- Conditionally show text -->
         <span
-            class="tracking-wide overflow-hidden text-base xl:text-sm"
+            class="min-w-0 overflow-hidden tracking-wide leading-none"
             :class="{
-                'text-sm': isNavbarOpen && size !== 'mobile',
+                'block text-sm': isNavbarOpen && size !== 'mobile',
                 'hidden': !isNavbarOpen,
-                'text-base': isNavbarOpen && size === 'mobile',
+                'block text-base': isNavbarOpen && size === 'mobile',
             }"
         >
             {{ text }}
@@ -80,6 +76,7 @@ export default {
         },
 
         routeMatches() {
+            if (this.active === '/proyecto' && this.$route.path === '/') return true;
             const regex = new RegExp(`^${this.active}(\/|$)`);
             return this.$route.path.match(regex) !== null;
         },

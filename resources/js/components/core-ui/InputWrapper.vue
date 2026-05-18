@@ -3,11 +3,12 @@
         <label
             class="flex items-center leading-6 text-sm font-medium relative align-bottom gap-1"
             :for="label"
-            :class="{'required': required, 'grid s-500:flex': info, labelColor}"
+            :class="[{ required: required, 'grid s-500:flex': info }, labelColor, labelClass]"
         >
             <!-- <span v-html="label"></span> -->
             <span v-if="!html">{{ label }}</span>
             <span v-else v-html="label"></span>
+            <span v-if="required" class="text-red-500">*</span>
 
             <IconCheck v-show="isValid" class="size-5 text-green-600" />
 
@@ -43,6 +44,10 @@
             labelColor: {
                 type: String,
                 default: 'text-gray-700'
+            },
+            labelClass: {
+                type: String,
+                default: ''
             },
             inline: {
                 type: Boolean,

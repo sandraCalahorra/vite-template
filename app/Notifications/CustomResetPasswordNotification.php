@@ -35,7 +35,7 @@ class CustomResetPasswordNotification extends ResetPasswordNotification
         $url = $this->resetUrl($notifiable);
 
         return (new MailMessage)
-                ->from('no-reply@ecomputer.es', 'Residencias Montearagón')
+                ->from('no-reply@ecomputer.es', 'Template')
                 ->subject('Restablecimiento de tu contraseña')
                 ->markdown('emails.reset_password', ['resetUrl' => $url]);
 

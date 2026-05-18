@@ -19,7 +19,7 @@
                 >
                     <!-- LOGO -->
                     <router-link :to="{ name: 'home' }" class="flex justify-center not-active">
-                        <img class="block h-10 w-auto xl:hidden object-contain" src="/img/montearagon2.png" alt="Logo_small">
+                        <img class="block h-10 w-auto xl:hidden" src="/img/vitejs.svg" alt="Logo_small">
                     </router-link>
 
                     <!-- HAMBURGER -->
@@ -49,7 +49,7 @@
                                         <img
                                             :class="[size != 'mobile' && isNavbarOpen ? 'h-20' : 'h-10']"
                                             class="w-auto object-contain transition-all duration-300"
-                                            src="/img/montearagon.png"
+                                            src="/img/vitejs.svg"
                                             alt="Logo_small"
                                         />
                                     </router-link>
@@ -67,7 +67,7 @@
                             >
                                 <div class="flex flex-col sidebar">
                                     <NavbarLink :to="{ name: 'home' }" :text="'Home'" active="/">
-                                        <IconBriefcaseSolid class="w-6 h-6 min-w-6 xl:w-5 xl:h-5 xl:min-w-5"  />
+                                        <IconBriefcaseSolid class="w-5 h-5 min-w-5 xl:w-4 xl:h-4 xl:min-w-4"  />
                                     </NavbarLink>
                                 </div>
 
@@ -79,11 +79,11 @@
                                 >
 
                                     <NavbarLink :to="{ name: 'users' }" :text="'Usuarios'" active="/usuarios">
-                                        <IconUsersSolid class="w-6 h-6 min-w-6 xl:w-5 xl:h-5 xl:min-w-5"  />
+                                        <IconUsersSolid class="w-5 h-5 min-w-5 xl:w-4 xl:h-4 xl:min-w-4"  />
                                     </NavbarLink>
 
                                     <NavbarLink :to="{ name: 'roles' }" :text="'Roles'"  active="/roles" v-if="$can('settings', 'view', { lt: 10 })">
-                                        <IconKeySolid class="w-6 h-6 min-w-6 xl:w-5 xl:h-5 xl:min-w-5"  />
+                                        <IconKeySolid class="w-5 h-5 min-w-5 xl:w-4 xl:h-4 xl:min-w-4"  />
                                     </NavbarLink>
                                 </component>
 
@@ -91,14 +91,14 @@
                                     title="Administración"
                                     :initialExpanded="true"
                                     class="flex flex-col"
-                                    
+
                                 >
                                     <NavbarLink :to="{ name: 'userManual'}" :text="'Manual del usuario'" active="/manual-del-usuario">
-                                        <IconQuestionDocument class="w-6 h-6 min-w-6 xl:w-5 xl:h-5 xl:min-w-5" />
+                                        <IconQuestionDocument class="w-5 h-5 min-w-5 xl:w-4 xl:h-4 xl:min-w-4" />
                                     </NavbarLink>
 
                                     <NavbarLink :to="{ name: 'tickets'}" :text="'Centro de soporte'" active="/centro-de-soporte" v-if="$can('settings', 'view', { lt: 20 })">
-                                        <IconSupport class="w-6 h-6 min-w-6 xl:w-5 xl:h-5 xl:min-w-5" />
+                                        <IconSupport class="w-5 h-5 min-w-5 xl:w-4 xl:h-4 xl:min-w-4" />
                                     </NavbarLink>
                                 </component>
 
@@ -108,11 +108,11 @@
                                     v-if="$can('settings', 'view', { lt: 10 })"
                                 >
                                     <NavbarLink :to="{ name: 'settings' }" text="Ajustes" active="/ajustes">
-                                        <IconWrenchSolid class="w-6 h-6 min-w-6 xl:w-5 xl:h-5 xl:min-w-5"/>
+                                        <IconWrenchSolid class="w-5 h-5 min-w-5 xl:w-4 xl:h-4 xl:min-w-4"/>
                                     </NavbarLink>
 
                                     <NavbarLink :to="{ name: 'permissions' }" :text="'Permisos'" active="/permisos">
-                                        <IconPermission class="w-6 h-6 min-w-6 xl:w-5 xl:h-5 xl:min-w-5"/>
+                                        <IconPermission class="w-5 h-5 min-w-5 xl:w-4 xl:h-4 xl:min-w-4"/>
                                     </NavbarLink>
                                 </component>
 

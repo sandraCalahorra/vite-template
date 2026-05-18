@@ -120,7 +120,7 @@
             </template>
         </TheModal>
 
-        <TheModal :open="isDeleteModalOpen" title="Borrar Usuario" @close="isDeleteModalOpen = false">
+        <TheModal :open="isDeleteModalOpen" title="Borrar Usuario" destructive @close="isDeleteModalOpen = false">
             <template #body>
                 <p class="pr-8 text-gray-800 tracking-wide leading-7">
                     SE VA A ELIMINAR ESTE USUARIO
@@ -140,7 +140,7 @@
             </template>
         </TheModal>
 
-        <TheModal :open="isBulkDeleteModalOpen" title="Borrar Usuarios Seleccionados" @close="isBulkDeleteModalOpen = false">
+        <TheModal :open="isBulkDeleteModalOpen" title="Borrar Usuarios Seleccionados" destructive @close="isBulkDeleteModalOpen = false">
             <template #body>
                 <p class="pr-8 text-gray-800 tracking-wide leading-7">
                     SE VAN A ELIMINAR <strong>{{ selectedUsers.length }}</strong> USUARIOS.

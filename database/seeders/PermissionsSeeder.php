@@ -27,9 +27,6 @@ class PermissionsSeeder extends Seeder
             (object)['entity' => 'my_profile', 'level' => '20', 'action_id' => '1', 'created_at' => now(), 'updated_at' => now()],
             (object)['entity' => 'my_profile', 'level' => '20', 'action_id' => '2', 'created_at' => now(), 'updated_at' => now()],
             (object)['entity' => 'my_profile', 'level' => '20', 'action_id' => '3', 'created_at' => now(), 'updated_at' => now()],
-            (object)['entity' => 'my_profile', 'level' => '30', 'action_id' => '1', 'created_at' => now(), 'updated_at' => now()],
-            (object)['entity' => 'my_profile', 'level' => '30', 'action_id' => '2', 'created_at' => now(), 'updated_at' => now()],
-            (object)['entity' => 'my_profile', 'level' => '30', 'action_id' => '3', 'created_at' => now(), 'updated_at' => now()],
 
             (object)['entity' => 'tickets', 'level' => '10', 'action_id' => '1', 'created_at' => now(), 'updated_at' => now()],
             (object)['entity' => 'tickets', 'level' => '10', 'action_id' => '2', 'created_at' => now(), 'updated_at' => now()],

@@ -1,8 +1,8 @@
 <template>
     <div
-        class="group relative rounded-2xl bg-white dark:bg-neutral-900
-            border border-neutral-200 dark:border-neutral-800
-            shadow-sm hover:shadow-md transition-all duration-300
+        class="group relative rounded-xl bg-white dark:bg-neutral-900
+            border border-neutral-150 dark:border-neutral-800
+            transition-all duration-300
             overflow-hidden flex"
     >
         <!-- Accent bar -->

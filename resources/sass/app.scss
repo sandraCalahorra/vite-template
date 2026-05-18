@@ -84,13 +84,6 @@ body {
   height: 100vh;
 }
 
-.required::after {
-  content: "*";
-  margin-left: 4px;
-  font-weight: 600;
-  color: #C53030;
-}
-
 input[disabled],
 textarea[disabled] {
 //   @apply bg-gray-200;
@@ -105,11 +98,6 @@ input::placeholder {
 .router-link-is-active {
 //   @apply bg-primary text-white;
   @apply bg-white text-primary;
-}
-
-.router-link-exact-active {
-//   @apply bg-white text-primary;
-  @apply bg-primary text-white;
 }
 
 /* .tooltip .tooltip-text-left {

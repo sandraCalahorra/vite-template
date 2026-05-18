@@ -4,6 +4,7 @@
             v-model="internalValue"
             :placeholder="placeholder"
             :multiple="multiple"
+            :showCheckAll="showCheckAll"
             :collapse-tags="collapseTags"
             :collapse-tags-tooltip="collapseTagsTooltip"
             :max-collapse-tags="maxCollapseTags"
@@ -11,11 +12,15 @@
             :disabled="disabled"
             :clearable="clearable"
             :filterable="filterable"
+            :multiple-limit="multipleLimit"
             :loading="loading"
             :remote="enableRemote"
             :remote-method="enableRemote ? handleRemoteSearch : null"
+            popper-class="new-multiselect-popper"
+            placement="bottom"
+            :popper-options="popperOptions"
             :class="[
-                { 'border-red-500': hasError },
+                { 'multiselect-invalid': hasError },
                 'w-full rounded-md cursor-pointer'
             ]"
             @change="handleChange"
@@ -41,15 +46,44 @@
             </template>
 
             <!-- OPTIONS -->
-            <el-option
-                v-for="(option, index) in options"
-                :key="index"
-                :label="option.name"
-                :value="option.id"
-                :disabled="option.$isDisabled"
-            >
-                <slot name="option" :option="option"></slot>
-            </el-option>
+            <template v-if="isGrouped">
+                <el-option-group
+                    v-for="group in options"
+                    :key="group.label"
+                    :label="group.label"
+                >
+                    <el-option
+                        v-for="item in group.options"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                    :disabled="item.$isDisabled"
+                >
+                        <div class="flex min-w-0 w-full items-start justify-between gap-2">
+                            <span class="min-w-0 flex-1 whitespace-normal break-words leading-5">{{ item.name }}</span>
+                            <span v-if="item[extraLabelKey]" class="shrink-0 text-xs text-gray-400 font-normal leading-5">
+                                {{ formatExtraLabel(item[extraLabelKey]) }}{{ extraLabelSuffix }}
+                            </span>
+                        </div>
+                    </el-option>
+                </el-option-group>
+            </template>
+            <template v-else>
+                <el-option
+                    v-for="(option, index) in options"
+                    :key="index"
+                    :label="option.name"
+                    :value="option.id"
+                    :disabled="option.$isDisabled"
+                >
+                    <div class="flex min-w-0 w-full items-start justify-between gap-2">
+                        <span class="min-w-0 flex-1 whitespace-normal break-words leading-5">{{ option.name }}</span>
+                        <span v-if="option[extraLabelKey]" class="shrink-0 text-xs text-gray-400 font-normal leading-5">
+                             {{ formatExtraLabel(option[extraLabelKey]) }}{{ extraLabelSuffix }}
+                        </span>
+                    </div>
+                </el-option>
+            </template>
 
             <!-- Single label -->
             <template #prefix>
@@ -87,11 +121,11 @@
 
 <script>
 import { defineComponent, watch } from 'vue';
-import { ElSelect, ElOption, ElInput, ElButton, ElCheckbox } from 'element-plus';
+import { ElSelect, ElOption, ElInput, ElButton, ElCheckbox, ElOptionGroup } from 'element-plus';
 
 export default defineComponent({
     name: 'NewMultiselect',
-    components: { ElSelect, ElOption, ElInput, ElButton, ElCheckbox },
+    components: { ElSelect, ElOption, ElInput, ElButton, ElCheckbox, ElOptionGroup },
 
     props: {
         modelValue: [Array, String, Number, Object],
@@ -106,6 +140,10 @@ export default defineComponent({
         multiple: {
             type: Boolean,
             default: false
+        },
+        showCheckAll: {
+            type: Boolean,
+            default: true
         },
         collapseTags: {
             type: Boolean,
@@ -158,6 +196,22 @@ export default defineComponent({
         clearable: {
             type: Boolean,
             default: true
+        },
+        isGrouped: {
+            type: Boolean,
+            default: false
+        },
+        extraLabelKey: {
+            type: String,
+            default: 'quarterly_price'
+        },
+        extraLabelSuffix: {
+            type: String,
+            default: ' €'
+        },
+        multipleLimit: {
+            type: Number,
+            default: 0
         }
     },
 
@@ -167,7 +221,27 @@ export default defineComponent({
             isAdding: false,
             optionName: '',
             checkAll: false,
-            indeterminate: false
+            indeterminate: false,
+            popperOptions: {
+                modifiers: [
+                    {
+                        name: 'preventOverflow',
+                        options: {
+                            boundary: 'viewport',
+                            rootBoundary: 'viewport',
+                            padding: 8
+                        }
+                    },
+                    {
+                        name: 'flip',
+                        options: {
+                            boundary: 'viewport',
+                            rootBoundary: 'viewport',
+                            padding: 8
+                        }
+                    }
+                ]
+            }
         };
     },
 
@@ -256,6 +330,19 @@ export default defineComponent({
                 return this.internalValue.length > 0;
             }
             return !!this.internalValue;
+        },
+
+        formatMoney(value) {
+            const number = Number(value || 0);
+            if (Number.isNaN(number)) return '0.00';
+            return number.toFixed(2);
+        },
+
+        formatExtraLabel(value) {
+            if (this.extraLabelKey === 'quarterly_price') {
+                return this.formatMoney(value);
+            }
+            return value;
         }
     }
 });
@@ -331,6 +418,41 @@ export default defineComponent({
     color: var(--primary);
 }
 
+.new-multiselect-popper {
+    max-width: calc(100vw - 1rem);
+    overflow-x: hidden;
+}
+
+.new-multiselect-popper .el-select-dropdown {
+    max-width: 100%;
+}
+
+.new-multiselect-popper .el-select-dropdown__wrap,
+.new-multiselect-popper .el-scrollbar__wrap {
+    overflow-x: hidden !important;
+}
+
+.new-multiselect-popper .el-select-dropdown__list {
+    max-width: 100%;
+}
+
+.new-multiselect-popper .el-select-dropdown__item {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 34px;
+    max-width: 100%;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    white-space: normal;
+    line-height: 1.25rem;
+}
+
+.new-multiselect-popper .el-select-dropdown__item > span {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+}
+
 .el-select-dropdown.is-multiple .el-select-dropdown__item.is-selected:after {
     background-color: var(--primary);
 }
@@ -359,5 +481,13 @@ export default defineComponent({
 
 .el-select__wrapper.is-focused {
     box-shadow: 0 0 0 1px var(--primary);
+}
+
+.multiselect-invalid .el-select__wrapper {
+    box-shadow: 0 0 0 1px #ef4444;
+}
+
+.multiselect-invalid .el-select__wrapper.is-focused {
+    box-shadow: 0 0 0 1px #ef4444;
 }
 </style>

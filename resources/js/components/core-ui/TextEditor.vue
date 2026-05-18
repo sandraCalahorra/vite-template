@@ -1,19 +1,32 @@
 <template>
         <!-- toolbar="essential"        -->
-    <div :class="customClass">
+    <div :class="[customClass, invalid && 'text-editor-invalid']">
+        <div class="relative">
 
-        <QuillEditor
-            theme="snow"
-            :toolbar="customToolbar"
-            :contentType="contentType"
-            v-model:content="editorContent"
-            @update:content="updateContent"
-            :style="customQuillStyle"
-            :disabled="disabled"
-            ref="quillEditor"
-            :class="customClass"
-        />
+            <QuillEditor
+                theme="snow"
+                :toolbar="resolvedToolbar"
+                :contentType="contentType"
+                v-model:content="editorContent"
+                @update:content="updateContent"
+                :style="customQuillStyle"
+                :disabled="disabled"
+                ref="quillEditor"
+                :class="customClass"
+                :placeholder="placeholder"
+            />
+            <span
+                v-if="invalid"
+                class="pointer-events-none absolute right-2 top-2 z-10 text-sm font-bold text-red-600"
+            >
+                !
+            </span>
+        </div>
+        <p v-if="invalid && errorMessage" class="mt-1 text-xs italic text-red-600 underline">
+            {{ errorMessage }}
+        </p>
         <small
+            v-if="charCount"
             class="block text-right mt-1"
             :class="{
                 'text-red-500': charCount > maxLength,
@@ -64,6 +77,22 @@ export default {
         required: {
             type: Boolean,
             default: false
+        },
+        invalid: {
+            type: Boolean,
+            default: false
+        },
+        errorMessage: {
+            type: String,
+            default: ''
+        },
+        placeholder: {
+            type: String,
+            default: ''
+        },
+        customToolbar: {
+            type: Array,
+            default: null
         }
     },
     data() {
@@ -80,7 +109,7 @@ export default {
                 wordBreak: 'break-word',
                 overflowWrap: 'break-word',
             },
-            customToolbar: [
+            defaultToolbar: [
                 [{ 'header': [1, 2, 3, false] }],
                 ['bold', 'italic', 'underline', 'strike'],
                 ['blockquote', 'code-block'],
@@ -92,6 +121,10 @@ export default {
         }
     },
     computed: {
+        resolvedToolbar() {
+            return this.customToolbar ?? this.defaultToolbar;
+        },
+
         charCount() {
             if (!this.editorContent) return 0;
 
@@ -121,3 +154,14 @@ export default {
     }
 };
 </script>
+
+<style>
+.text-editor-invalid .ql-toolbar,
+.text-editor-invalid .ql-container {
+    border-color: #ef4444 !important;
+}
+
+.text-editor-invalid .ql-container {
+    box-shadow: 0 0 0 1px #ef4444;
+}
+</style>

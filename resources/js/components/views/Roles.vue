@@ -74,7 +74,7 @@
             </template>
         </TheModal>
 
-        <TheModal :open="isDeleteModalOpen" title="Borrar Rol" @close="isDeleteModalOpen = false">
+        <TheModal :open="isDeleteModalOpen" title="Borrar Rol" destructive @close="isDeleteModalOpen = false">
             <template #body>
                 <p class="pr-8 leading-7 tracking-wide text-gray-800">
                     SE VA A ELIMINAR ESTE ROL

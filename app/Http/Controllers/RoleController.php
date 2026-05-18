@@ -68,19 +68,6 @@ class RoleController extends Controller
 
         $user_object = $request->attributes->get('user_object');
 
-        // restrict level access
-        if ($user_object->level !== null) {
-            if($user_object->level >= 30) {
-                $role->where('level', $user_object->level);
-            } else if($user_object->level == 21 || $user_object->level == 22 || $user_object->level == 15) {
-                $role->where('level', ">", $user_object->level);
-            } else if ($user_object->level >= 10) {
-                $role->where('level', ">=", $user_object->level);
-                if ($user_object->level >= 20) $role->where('level', "!=", 21)->where('level', "!=", 22);
-            }
-        } else if (!$user_object) {
-            $role->whereRaw('1 = 0');
-        }
 
         $allRoles = $role->get();
         return $allRoles->sortBy('level', SORT_NATURAL)->values();

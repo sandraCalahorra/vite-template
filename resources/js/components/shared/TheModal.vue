@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="showModal"
-        class="fixed z-50 px-4 pb-4 inset-0 flex items-end sm:items-center justify-center text-sm"
+        class="fixed z-[1000] px-4 pb-4 inset-0 flex items-end sm:items-center justify-center text-sm"
     >
         <transition
             enter-active-class="duration-500"
@@ -36,12 +36,10 @@
             <div v-if="showContent" class="relative z-50">
                 <div
                     class="fixed bottom-0 inset-x-0 m-4 sm:relative bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-100 transform transition-all"
-                    :class="
-                        large ? 'sm:w-192 lg:w-[70rem]' : 'sm:w-160 lg:w-200'
-                    "
+                    :class="modalWidthClass"
                     style="max-width: 90vw"
                 >
-                    <div v-if="hasHeader" class="px-6 py-4 bg-white border-b border-gray-100">
+                    <div v-if="showHeader" class="px-6 py-4 bg-white border-b border-gray-100">
                         <div class="flex items-center justify-between">
                             <h2
                                 class="font-semibold text-lg leading-6 text-gray-900"
@@ -55,14 +53,34 @@
                         </div>
                     </div>
                     <div
-                        class="px-6 py-6 staticMultiselect"
-                        style="max-height: 65vh; overflow-y: auto"
+                        :class="bodyClass"
+                        :style="bodyStyle"
                     >
-                        <slot name="body" />
+                        <div v-if="isMessageModal" class="flex items-start gap-4">
+                            <div class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border" :class="messageIconWrapperClass">
+                                <span class="text-xl font-bold leading-none" :class="messageIconTextClass">
+                                    {{ messageSymbol }}
+                                </span>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <h2 class="text-xl font-semibold leading-7 text-slate-900">
+                                    {{ title }}
+                                </h2>
+                                <div class="mt-2 text-sm leading-6 text-slate-500">
+                                    <slot name="body" />
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="staticMultiselect" style="max-height: 65vh; overflow-y: auto">
+                                <slot name="body" />
+                            </div>
+                        </div>
                     </div>
                     <div
                         v-if="hasFooter == true"
-                        class="bg-gray-50 border-t border-gray-100 px-6 py-4 sm:flex sm:flex-row-reverse space-x-3 space-x-reverse space-y-3 sm:space-y-0 text-sm"
+                        class="modal-footer-actions flex w-full flex-col gap-3 border-t border-gray-100 bg-gray-50 px-6 py-4 sm:w-auto sm:flex-row-reverse sm:gap-0 sm:space-x-3 sm:space-x-reverse"
+                        :class="{ 'px-5 py-4': isMessageModal }"
                     >
                         <slot name="action" />
                         <ButtonAction
@@ -72,13 +90,14 @@
                             :color="actionButton.disabled ? 'gray' : 'primary'"
                             @click="actionButton.action"
                             :disabled="actionButton.disabled"
+                            class="w-full sm:w-auto"
                         />
                         <ButtonAction
                             v-if="!blockModal && !actionButton"
                             :label="'Cancelar'"
                             size="sm"
                             color="white"
-                            class="border border-gray-300 shadow-sm text-gray-700 hover:bg-gray-50"
+                            class="w-full border border-gray-300 shadow-sm text-gray-700 hover:bg-gray-50 sm:w-auto"
                             @click.prevent="close"
                         />
                     </div>
@@ -114,6 +133,14 @@ export default {
             type: Boolean,
             default: false,
         },
+        messageType: {
+            type: String,
+            default: '',
+        },
+        destructive: {
+            type: Boolean,
+            default: false,
+        },
         actionButton: {
             type: Object,
             default: () => null,
@@ -139,6 +166,63 @@ export default {
     },
 
     computed: {
+        resolvedMessageType() {
+            if (this.messageType) return this.messageType;
+            if (this.destructive) return 'danger';
+            return '';
+        },
+
+        isMessageModal() {
+            return !!this.resolvedMessageType;
+        },
+
+        showHeader() {
+            return this.hasHeader && !this.isMessageModal;
+        },
+
+        modalWidthClass() {
+            if (this.isMessageModal) {
+                return 'sm:w-[32rem]';
+            }
+
+            return this.large ? 'sm:w-192 lg:w-[70rem]' : 'sm:w-160 lg:w-200';
+        },
+
+        bodyClass() {
+            return this.isMessageModal ? 'px-5 py-6' : 'px-6 py-6';
+        },
+
+        bodyStyle() {
+            return this.isMessageModal ? '' : '';
+        },
+
+        messageSymbol() {
+            return {
+                danger: '!',
+                success: '✓',
+                warning: '!',
+                info: 'i',
+            }[this.resolvedMessageType] || 'i';
+        },
+
+        messageIconWrapperClass() {
+            return {
+                danger: 'border-red-100 bg-red-50',
+                success: 'border-emerald-100 bg-emerald-50',
+                warning: 'border-amber-100 bg-amber-50',
+                info: 'border-sky-100 bg-sky-50',
+            }[this.resolvedMessageType] || 'border-slate-100 bg-slate-50';
+        },
+
+        messageIconTextClass() {
+            return {
+                danger: 'text-red-600',
+                success: 'text-emerald-600',
+                warning: 'text-amber-600',
+                info: 'text-sky-600',
+            }[this.resolvedMessageType] || 'text-slate-600';
+        },
+
         leaving() {
             return this.backdropLeaving || this.cardLeaving;
         },
@@ -179,4 +263,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@media (max-width: 639px) {
+    .modal-footer-actions > *,
+    .modal-footer-actions button,
+    .modal-footer-actions a {
+        width: 100%;
+    }
+}
+</style>

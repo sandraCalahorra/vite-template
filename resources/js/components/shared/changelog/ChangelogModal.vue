@@ -8,7 +8,7 @@
             <transition name="pop" appear>
                 <div
                     v-if="showContent"
-                    class="relative w-full max-w-3xl rounded-2xl shadow-2xl border border-neutral-200/50 dark:border-white/10 overflow-hidden"
+                    class="relative w-full max-w-3xl rounded-xl shadow-2xl border border-neutral-200/50 dark:border-white/10 overflow-hidden"
                     :style="backgroundStyle"
                 >
                     <div class="relative px-8 pt-8 pb-2 bg-white/90 dark:bg-neutral-900/90 text-neutral-800 dark:text-neutral-100 transition-colors duration-300">
@@ -27,7 +27,7 @@
                         </button>
 
                         <!-- Body -->
-                        <div class="space-y-6 max-h-[65vh] overflow-y-auto px-1 scrollbar">
+                        <div class="space-y-6 max-h-[65vh] overflow-y-auto px-1 scrollbar-subtle">
                             <ChangelogSection
                                 v-if="changelog?.news"
                                 icon="IconAutoAwesoneFilled"
@@ -58,7 +58,7 @@
                                     :href="$router.resolve({ name: 'changelogs' }).href"
                                     class="text-primary-500 hover:underline cursor-pointer hover:text-primary-700"
                                 >
-                                notas de las versiones de Montearagón
+                                notas de las versiones de Template
                                 </a>
                                 y vea cómo funciona!
                             </p>
@@ -163,7 +163,25 @@ export default {
     opacity: 0;
     transform: scale(0.96) translateY(10px);
 }
-.dark .scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(200, 200, 200, 0.2);
+.scrollbar-subtle {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.55) transparent;
+}
+
+.scrollbar-subtle::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollbar-subtle::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrollbar-subtle::-webkit-scrollbar-thumb {
+    background-color: rgba(148, 163, 184, 0.5);
+    border-radius: 9999px;
+}
+
+.scrollbar-subtle:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 116, 139, 0.72);
 }
 </style>

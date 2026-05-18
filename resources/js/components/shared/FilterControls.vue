@@ -584,7 +584,7 @@
             </template>
         </TheModal>
 
-        <TheModal :open="isDeleteFilterModalOpen" title="Borrar filtros personalizados" @close="isDeleteFilterModalOpen = false">
+        <TheModal :open="isDeleteFilterModalOpen" title="Borrar filtros personalizados" destructive @close="isDeleteFilterModalOpen = false">
             <template #body>
                 <p class="pr-8 leading-7 tracking-wide text-gray-800">
                     SE VAN A ELIMINAR TODOS LOS FILTROS PERSONALIZADOS

@@ -113,6 +113,7 @@
             <TheModal
                 :open="isDeleteModalOpen"
                 :title="`Borrar Permiso`.toUpperCase()"
+                destructive
                 @close="isDeleteModalOpen = false"
             >
                 <template #body>

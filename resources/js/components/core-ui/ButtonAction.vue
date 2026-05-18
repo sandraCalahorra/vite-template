@@ -90,6 +90,10 @@ export default {
                 'bg-gradient-to-bl from-gray-500 to-gray-700 text-white': this.color === 'gray',
                 'bg-gradient-to-bl from-green-600 to-green-800 text-white': this.color === 'green',
                 'bg-gradient-to-bl from-red-600 to-red-700 text-white': this.color === 'red',
+                'bg-gradient-to-bl from-yellow-600 to-yellow-700 text-white': this.color === 'yellow',
+                'bg-gradient-to-bl from-orange-600 to-orange-700 text-white': this.color === 'orange',
+                'bg-gradient-to-bl from-sky-600 to-sky-700 text-white': this.color === 'sky',
+                'bg-gradient-to-bl from-white to-white text-black border': this.color === 'white',
             };
         },
 

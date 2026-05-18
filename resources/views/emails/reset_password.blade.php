@@ -1,7 +1,7 @@
 @component('mail::message')
 # ¡Hola!
 
-Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en **Residencias Montearagón**.
+Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en **Template**.
 
 Si fuiste tú quien la solicitó, haz clic en el botón de abajo para establecer una nueva contraseña:
 
@@ -22,11 +22,11 @@ Este enlace es válido solo durante los próximos **60 minutos**, así que aseg�
 
 Si no has solicitado este cambio, puedes ignorar este correo. Tu contraseña actual no se verá afectada, y no es necesario que realices ninguna acción.
 
-Gracias por confiar en **Residencias Montearagón**.
+Gracias por confiar en **Template**.
 
 
 
-Saludos cordiales, El equipo de Residencias Montearagón.
+Saludos cordiales, El equipo de Template.
 
 
 .
@@ -42,7 +42,7 @@ Saludos cordiales, El equipo de Residencias Montearagón.
         display: inline-block;
         width: 100px; /* Set width for the image */
         height: 50px; /* Set height for the image */
-        background-image: url('https://montearagon.ecomputer.es/img/montearagon.png'); /* URL to the image */
+        background-image: url('https://template.ecomputer.es/img/template.png'); /* URL to the image */
         background-size: contain; /* Make sure the image fits within the link */
         background-repeat: no-repeat;
         color: transparent; /* Hide link text */

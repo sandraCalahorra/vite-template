@@ -105,7 +105,7 @@ class TicketsController extends Controller
         $user_object = $request->attributes->get('user_object');
 
         // Restrict access based on user level and ownership of the ticket
-        if ($user_object->level && $user_object->level >= 30) {
+        if ($user_object->level && $user_object->level >= 20) {
             if ($user_object->id == $id) {
                 return response()->json($ticket);
             } else {

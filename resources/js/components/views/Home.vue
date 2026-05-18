@@ -34,7 +34,7 @@
             />
         </div>
 
-        <TheModal :open="isDeleteModalOpen" title="Borrar Anuncio" @close="isDeleteModalOpen = false">
+        <TheModal :open="isDeleteModalOpen" title="Borrar Anuncio" destructive @close="isDeleteModalOpen = false">
             <template #body>
                 <p class="pr-8 text-gray-800 tracking-wide leading-7">
                     SE VA A ELIMINAR ESTE ANUNCIO
@@ -95,7 +95,7 @@ export default defineComponent({
         datatableActions() {
             const array = [];
 
-            if (this.user?.level < 30) {
+            if (this.user?.level <= 20) {
                 array.push('delete');
             }
 

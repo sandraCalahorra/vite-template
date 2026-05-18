@@ -31,12 +31,12 @@ class SupportTicketMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), "Soporte Montearagón"),
+            from: new Address(config('mail.from.address'), "Soporte Template"),
             cc: [
                 new Address($this->ticket->email, $this->ticket->name)
             ],
             replyTo: [
-                new Address('soporte.sandracalahorra@ecomputer.es', 'Soporte Montearagón'),
+                new Address('soporte.sandracalahorra@ecomputer.es', 'Soporte Template'),
                 new Address($this->ticket->email, $this->ticket->name)
             ],
             subject: $this->ticket->subject,

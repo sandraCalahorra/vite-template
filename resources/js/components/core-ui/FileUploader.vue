@@ -1,61 +1,65 @@
 <template>
-    <div class="w-full max-w-xl p-4 bg-white border border-dashed rounded-md">
+    <div class="w-full max-w-xl p-3 bg-white border border-dashed rounded-md sm:p-4">
         <ButtonAction
-            :label="'Subir archivo...'"
+            v-if="!hideButton"
+            :label="labelOverride || 'Subir archivo...'"
             color="primary"
-            size="sm"
+            :size="sizeOverride || 'sm'"
             @click="triggerUpload"
         />
         <!-- File list -->
-        <div v-if="files.length > 0 || modelValue.length > 0" class="py-2">
+        <div v-if="!hideButton && (files.length > 0 || modelValue.length > 0)" class="py-2">
             <div
                 v-for="(file, index) in (files.length > 0 ? files : modelValue)"
                 :key="index"
-                class="flex items-center justify-between p-1 rounded-sm cursor-pointer group hover:bg-gray-100"
+                class="flex min-w-0 items-center justify-between gap-2 p-1 rounded-sm cursor-pointer group hover:bg-gray-100"
                 @mouseenter="hovered = index"
                 @mouseleave="hovered = null"
             >
                 <div
-                    class="flex flex-row items-center gap-1 text-sm text-gray-500 truncate group-hover:text-primary"
+                    class="flex min-w-0 flex-1 flex-row items-center gap-1 text-sm text-gray-500 group-hover:text-primary"
                     @click="openFile(file)"
                 >
-                    <template v-if="previewImage && previewImage.is_image || modelValue[0]">
+                    <template v-if="previewImage && previewImage.is_image">
                         <div class="w-14 h-14 flex-shrink-0 rounded-lg bg-slate-100 overflow-hidden flex items-center justify-center">
                             <img
-                                :src="previewImage.value || modelValue[0]"
-                                :alt="file.name || file.original_name || file.filename || modelValue[0]?.split('/').pop()"
+                                :src="previewImage.value"
+                                :alt="file.name || file.original_name || file.filename"
                                 class="w-full h-full object-cover"
                             />
                         </div>
                     </template>
 
                     <template v-else>
-                        <IconDocumentText class="w-4 h-4 text-gray-400" />
+                        <IconDocumentText class="w-4 h-4 min-w-4 text-gray-400" />
                     </template>
 
-                    <span class="font-semibold truncate">
+                    <span class="min-w-0 truncate font-semibold">
                         {{ file.name || file.original_name || file.filename || modelValue[0]?.split('/').pop() }}
                     </span>
-                    <span class="text-xs italic text-gray-400">
+                    <span class="shrink-0 text-xs italic text-gray-400">
                         {{ file.size ? `(${formatBytes(file.size)})` : '' }}
                     </span>
                 </div>
 
-                <div class="flex items-center justify-center w-5 h-5 transition-colors">
-                    <HeroiconXMark
-                        v-if="hovered === index && !file.uploading"
-                        class="w-4 h-4 text-gray-700 cursor-pointer min-w-4 hover:text-primary"
-                        @click="removeFile(index)"
-                    />
+                <div class="flex h-5 w-5 shrink-0 items-center justify-center transition-colors">
                     <IconLoading
-                        v-else-if="file.uploading"
+                        v-if="file.uploading"
                         class="w-4 h-4 text-primary animate-spin"
                     />
                     <IconCheckmarkCircle
-                        v-else
-                        class="w-4 h-4 text-green-500 min-w-4"
-                        :class="{ 'animate-bounce': file.isNew }"
+                        v-else-if="file.isNew"
+                        class="w-4 h-4 text-green-500 min-w-4 animate-bounce"
                     />
+                    <div
+                        v-else
+                        class="flex items-center justify-center"
+                        @click.stop="removeFile(index)"
+                    >
+                        <HeroiconXMark
+                            class="w-4 h-4 text-gray-400 cursor-pointer min-w-4 hover:text-red-500 transition-colors"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,12 +91,12 @@ export default defineComponent({
 
     mixins: [AdminMixin],
 
-    emits: ['files-changed'],
+    emits: ['files-changed', 'remove-existing', 'open-existing'],
 
     props: {
         accept: {
             type: String,
-            default: '.pdf,.doc,.docx,.odt,.xls,.xlsx,.ppt,.pptx, .zip',
+            default: '.pdf, .doc, .docx, .odt, .xls, .xlsx, .ppt, .pptx, .zip, .jpg, .png, .jpeg',
         },
         multiple: {
             type: Boolean,
@@ -109,6 +113,18 @@ export default defineComponent({
         errorMessage: {
             type: String,
             default: 'Este campo es obligatorio.'
+        },
+        labelOverride: {
+            type: String,
+            default: null
+        },
+        sizeOverride: {
+            type: String,
+            default: null
+        },
+        hideButton: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -208,6 +224,10 @@ export default defineComponent({
         },
 
         removeFile(index) {
+            if (this.files.length === 0 && this.modelValue && this.modelValue.length > 0) {
+                this.$emit('remove-existing', this.modelValue[index], index);
+                return;
+            }
             this.files.splice(index, 1);
             this.internalValue = this.files.length > 0;
             this.previewImage = {};
@@ -258,9 +278,13 @@ export default defineComponent({
         openFile(file) {
             if (file.url) {
                 window.open(file.url, '_blank');
-            } else {
-                const blobUrl =  typeof file === 'string' ? file : URL.createObjectURL(file);
+            } else if (file instanceof File || file instanceof Blob) {
+                const blobUrl = URL.createObjectURL(file);
                 window.open(blobUrl, '_blank');
+            } else if (typeof file === 'string') {
+                window.open(file, '_blank');
+            } else {
+                this.$emit('open-existing', file);
             }
         },
 

@@ -281,7 +281,7 @@ export default defineComponent({
                     title: 'Manual de Usuario',
                     description: 'Guía completa sobre el uso de la plataforma.',
                     path: '/manual/TELECUIDAMOS. MANUAL DE USUARIO_2.0.0.pdf',
-                    image: '/img/montearagon.png',
+                    image: '/img/template.png',
                     minLevel: 99,
                     type: 'pdf'
                 },
