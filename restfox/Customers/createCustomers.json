@@ -1,0 +1,142 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/customers/create?name=Ana Lop",
+    "method": "POST",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [
+        {
+            "name": "name",
+            "value": "",
+            "description": "Customer name",
+            "disabled": true
+        },
+        {
+            "name": "nif",
+            "value": "",
+            "description": "Customer NIF code",
+            "disabled": true
+        },
+        {
+            "name": "ada",
+            "value": "",
+            "description": "User ID for the associated ADA",
+            "disabled": true
+        },
+        {
+            "name": "email",
+            "value": "",
+            "description": "Customer email address",
+            "disabled": true
+        },
+        {
+            "name": "phone_country_code",
+            "value": "",
+            "description": "Country code for the primary phone number (34 by default)",
+            "disabled": true
+        },
+        {
+            "name": "phone",
+            "value": "",
+            "description": "Customer primary phone number (without country code). Must be a mobile phone number.",
+            "disabled": true
+        },
+        {
+            "name": "phone2_country_code",
+            "value": "",
+            "description": "Country code for the secondary phone number (34 by default)",
+            "disabled": true
+        },
+        {
+            "name": "phone2",
+            "value": "",
+            "description": "Customer secondary phone number (without country code)",
+            "disabled": true
+        },
+        {
+            "name": "email",
+            "value": "",
+            "description": "Customer primary email address",
+            "disabled": true
+        },
+        {
+            "name": "email2",
+            "value": "",
+            "description": "Customer secondary email address",
+            "disabled": true
+        },
+        {
+            "name": "website",
+            "value": "",
+            "description": "Customer website domain",
+            "disabled": true
+        },
+        {
+            "name": "address",
+            "value": "",
+            "description": "Customer address",
+            "disabled": true
+        },
+        {
+            "name": "city",
+            "value": "",
+            "description": "City for the customer's address",
+            "disabled": true
+        },
+        {
+            "name": "postal_code",
+            "value": "",
+            "description": "Postal code for the customer's address",
+            "disabled": true
+        },
+        {
+            "name": "province",
+            "value": "",
+            "description": "Province for the customer's address",
+            "disabled": true
+        },
+        {
+            "name": "account_number",
+            "value": "",
+            "description": "IBAN number",
+            "disabled": true
+        },
+        {
+            "name": "representative",
+            "value": "",
+            "description": "If the customer is a company, the name of its representative",
+            "disabled": true
+        },
+        {
+            "name": "comments",
+            "value": "",
+            "description": "Comments for this customer",
+            "disabled": true
+        },
+        {
+            "name": "voucher",
+            "value": "",
+            "description": "Kit Digital voucher code",
+            "disabled": true
+        },
+        {
+            "name": "voucher_granting_date",
+            "value": "",
+            "description": "Kit Digital voucher code granting date",
+            "disabled": true
+        },
+        {
+            "name": "has_representative",
+            "value": "",
+            "description": "True if the customer has signed the 'Representación voluntaria' document",
+            "disabled": true
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzIzNzk0OTU2LCJleHAiOjE3MjM4ODEzNTYsIm5iZiI6MTcyMzc5NDk1NiwianRpIjoiMHZSdEN5ZEdHakpNaUcyeCIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwidXNlciI6eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJvb3RAZWNvbXB1dGVyLmVzIiwibGV2ZWwiOiIwIiwiY3JlYXRlZF9hdCI6bnVsbCwidXBkYXRlZF9hdCI6bnVsbCwibmlmIjpudWxsLCJwaG9uZSI6bnVsbCwiY29udGFjdCI6bnVsbCwiY2l0eSI6bnVsbCwiYWdyZWVtZW50cyI6bnVsbCwic2lnbmVkX2NvbnRyYWN0IjowLCJjb250cmFjdF9zZW50IjowLCJyb2xlX25hbWUiOiJTdXBlcmFkbWluIn19.kSM5uf0h5w8WUY2ATuEcyIBaxHV3QSaI1aePvziEF2I"
+    },
+    "sortOrder": 3
+}

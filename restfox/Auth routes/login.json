@@ -1,0 +1,37 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/login?email=tomasgenerelo@ecomputer.es&password=tomgen#26985",
+    "method": "POST",
+    "body": {
+        "mimeType": "No Body",
+        "params": [
+            {
+                "name": "a",
+                "value": "b",
+                "type": "text",
+                "disabled": true
+            }
+        ]
+    },
+    "headers": [],
+    "parameters": [
+        {
+            "name": "email",
+            "value": "tomasgenerelo@ecomputer.es",
+            "disabled": false,
+            "description": "User email"
+        },
+        {
+            "name": "password",
+            "value": "tomgen#26985",
+            "disabled": false,
+            "description": "User password"
+        }
+    ],
+    "authentication": {
+        "type": "No Auth"
+    },
+    "sortOrder": 0,
+    "pathParameters": [],
+    "description": ""
+}

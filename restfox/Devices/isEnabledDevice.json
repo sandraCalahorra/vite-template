@@ -1,0 +1,27 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/devices/{id}/is-enabled?isEnabled=1",
+    "method": "POST",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [
+        {
+            "name": "isEnabled",
+            "value": "1"
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2VrZC5kZXZlY29tcHV0ZXIuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcyNDkyMjQ2NiwiZXhwIjoxNzI1MDA4ODY2LCJuYmYiOjE3MjQ5MjI0NjYsImp0aSI6InMwYmlTV29zaTdBUlYxUmUiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInVzZXIiOnsiaWQiOjIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZWNvbXB1dGVyLmVzIiwibGV2ZWwiOiIxMCIsImNyZWF0ZWRfYXQiOm51bGwsInVwZGF0ZWRfYXQiOm51bGwsIm5pZiI6bnVsbCwicGhvbmUiOm51bGwsImNvbnRhY3QiOm51bGwsImNpdHkiOm51bGwsImFncmVlbWVudHMiOm51bGwsInNpZ25lZF9jb250cmFjdCI6MCwiY29udHJhY3Rfc2VudCI6MCwibWFuYWdpbmdfdXNlciI6bnVsbCwiY3VzdG9tX3VzZXJfY29tbWlzc2lvbiI6bnVsbCwicm9sZV9uYW1lIjoiQWRtaW4ifX0.UyL1fsh3lp0ypY_wkU41tMHwuI86BskwnWqH6qU8a4o"
+    },
+    "sortOrder": 7,
+    "pathParameters": [
+        {
+            "name": "id",
+            "value": "1",
+            "description": "Device ID"
+        }
+    ]
+}

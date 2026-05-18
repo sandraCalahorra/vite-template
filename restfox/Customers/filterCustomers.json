@@ -1,0 +1,64 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/customers/filter",
+    "method": "GET",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [
+        {
+            "name": "stringSearch",
+            "value": "",
+            "description": "String to be searched in the following fields: name, nif, email, email2, phone, phone2, account_number, website",
+            "disabled": true
+        },
+        {
+            "name": "pirineos",
+            "value": "true",
+            "description": "If true, only customers with a Pirineos code will be returned",
+            "disabled": true
+        },
+        {
+            "name": "ada",
+            "value": "",
+            "description": "ID of the corresponding ADA",
+            "disabled": true
+        },
+        {
+            "name": "withoutAda",
+            "value": "",
+            "description": "If true, only customers without an assigned ADA will be returned",
+            "disabled": true
+        },
+        {
+            "name": "nif",
+            "value": "",
+            "description": "NIF code",
+            "disabled": true
+        },
+        {
+            "name": "per_page",
+            "value": "",
+            "description": "Number of items per page",
+            "disabled": true
+        },
+        {
+            "name": "page",
+            "value": "",
+            "description": "Page to be returned",
+            "disabled": true
+        },
+        {
+            "name": "show_all",
+            "value": "",
+            "description": "If true, all the results will be returned in a single page",
+            "disabled": true
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2VrZC5kZXZlY29tcHV0ZXIuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcyNTM1MDE1NCwiZXhwIjoxNzI1NDM2NTU0LCJuYmYiOjE3MjUzNTAxNTQsImp0aSI6IjZEbFAzNnlqVGhJak9PaTEiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInVzZXIiOnsiaWQiOjIsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZWNvbXB1dGVyLmVzIiwibGV2ZWwiOiIxMCIsImNyZWF0ZWRfYXQiOm51bGwsInVwZGF0ZWRfYXQiOm51bGwsIm5pZiI6bnVsbCwicGhvbmUiOm51bGwsImNvbnRhY3QiOm51bGwsImNpdHkiOm51bGwsImFncmVlbWVudHMiOm51bGwsInNpZ25lZF9jb250cmFjdCI6MCwiY29udHJhY3Rfc2VudCI6MCwibWFuYWdpbmdfdXNlciI6bnVsbCwiY3VzdG9tX3VzZXJfY29tbWlzc2lvbiI6bnVsbCwicm9sZV9uYW1lIjoiQWRtaW4ifX0.iU4_QKrEXFmP3wgzMNmUjsDB9ydcvInli2Lo7sJa_Rg"
+    },
+    "sortOrder": 0
+}

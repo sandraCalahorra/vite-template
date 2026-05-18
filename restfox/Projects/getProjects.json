@@ -1,0 +1,82 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/projects",
+    "method": "GET",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [
+        {
+            "name": "stringSearch",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "has_no_products_yet",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "nif",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "type",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "ada",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "user",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "device",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "correctProjects",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "status",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "withoutStatus",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "per_page",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "page",
+            "value": "",
+            "disabled": true
+        },
+        {
+            "name": "show_all",
+            "value": "",
+            "disabled": true
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzI1NTIxNTU5LCJleHAiOjIzMjU1MjE0OTksIm5iZiI6MTcyNTUyMTU1OSwianRpIjoiT04yZ0JKWE1wVUxQUWFSZyIsInN1YiI6IjEwIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInVzZXIiOnsiaWQiOjEwLCJuYW1lIjoiVG9tw6FzIEdlbmVyZWxvIiwiZW1haWwiOiJ0b21hc2dlbmVyZWxvQGVjb21wdXRlci5lcyIsImxldmVsIjoiMTAiLCJjcmVhdGVkX2F0IjoiMjAyNC0wNy0yNFQwNjo1OToyMC4wMDAwMDBaIiwidXBkYXRlZF9hdCI6IjIwMjQtMDctMjRUMDY6NTk6MjAuMDAwMDAwWiIsIm5pZiI6bnVsbCwicGhvbmUiOm51bGwsImNvbnRhY3QiOm51bGwsImNpdHkiOm51bGwsImFncmVlbWVudHMiOm51bGwsInNpZ25lZF9jb250cmFjdCI6MCwiY29udHJhY3Rfc2VudCI6MCwibWFuYWdpbmdfdXNlciI6bnVsbCwiY3VzdG9tX3VzZXJfY29tbWlzc2lvbiI6bnVsbCwicm9sZV9uYW1lIjoiQWRtaW5pc3RyYWRvciJ9fQ.AS8LQ4EVNxj1rhYn0tEQ2v6JscutkJAGOQM-fKUXFq4"
+    },
+    "sortOrder": 1,
+    "pathParameters": []
+}

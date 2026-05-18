@@ -1,0 +1,14 @@
+<template>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+        <circle fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="40" cx="256" cy="256" r="200">
+        </circle>
+        <path stroke="currentColor" stroke-miterlimit="10" stroke-width="40" d="M114.58 114.58l282.84 282.84"
+            fill="currentColor"></path>
+    </svg>
+</template>
+
+<script>
+export default {
+    name: "IconBanSign"
+};
+</script>

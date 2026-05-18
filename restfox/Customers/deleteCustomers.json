@@ -1,0 +1,23 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/customers?id=22",
+    "method": "DELETE",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [
+        {
+            "name": "id",
+            "value": "22",
+            "disabled": false,
+            "description": "Customer ID"
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2VrZC5kZXZlY29tcHV0ZXIuY29tL2FwaS9sb2dpbiIsImlhdCI6MTcyNDMzNDQxNCwiZXhwIjoxNzI0NDIwODE0LCJuYmYiOjE3MjQzMzQ0MTQsImp0aSI6ImF1ZmowUHdPeUIzUDZPbEQiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInVzZXIiOnsiaWQiOjEsIm5hbWUiOiJSb290IiwiZW1haWwiOiJyb290QGVjb21wdXRlci5lcyIsImxldmVsIjoiMCIsImNyZWF0ZWRfYXQiOm51bGwsInVwZGF0ZWRfYXQiOm51bGwsIm5pZiI6bnVsbCwicGhvbmUiOm51bGwsImNvbnRhY3QiOm51bGwsImNpdHkiOm51bGwsImFncmVlbWVudHMiOm51bGwsInNpZ25lZF9jb250cmFjdCI6MCwiY29udHJhY3Rfc2VudCI6MCwibWFuYWdpbmdfdXNlciI6bnVsbCwicm9sZV9uYW1lIjoiU3VwZXJhZG1pbiJ9fQ.p7-SL3Oh87YXkCNC5M_lITNJ8yxtpNSkyHMDhFaLeyI"
+    },
+    "sortOrder": 7,
+    "pathParameters": []
+}

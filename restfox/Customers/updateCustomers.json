@@ -1,0 +1,160 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/customers/{id}",
+    "method": "PUT",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [
+        {
+            "name": "name",
+            "value": "Mª Paz Carrero SESE",
+            "disabled": true
+        },
+        {
+            "name": "pirineos_code",
+            "value": "",
+            "description": "The customer's ID code in Pirineos",
+            "disabled": true
+        },
+        {
+            "name": "name",
+            "value": "",
+            "description": "Customer name",
+            "disabled": true
+        },
+        {
+            "name": "nif",
+            "value": "234B",
+            "description": "Customer NIF code",
+            "disabled": true
+        },
+        {
+            "name": "ada",
+            "value": "",
+            "description": "User ID for the associated ADA",
+            "disabled": true
+        },
+        {
+            "name": "email",
+            "value": "",
+            "description": "Customer email address",
+            "disabled": true
+        },
+        {
+            "name": "phone_country_code",
+            "value": "",
+            "description": "Country code for the primary phone number (34 by default)",
+            "disabled": true
+        },
+        {
+            "name": "phone",
+            "value": "",
+            "description": "Customer primary phone number (without country code). Must be a mobile phone number.",
+            "disabled": true
+        },
+        {
+            "name": "phone2_country_code",
+            "value": "",
+            "description": "Country code for the secondary phone number (34 by default)",
+            "disabled": true
+        },
+        {
+            "name": "phone2",
+            "value": "",
+            "description": "Customer secondary phone number (without country code)",
+            "disabled": true
+        },
+        {
+            "name": "email",
+            "value": "",
+            "description": "Customer primary email address",
+            "disabled": true
+        },
+        {
+            "name": "email2",
+            "value": "",
+            "description": "Customer secondary email address",
+            "disabled": true
+        },
+        {
+            "name": "website",
+            "value": "",
+            "description": "Customer website domain",
+            "disabled": true
+        },
+        {
+            "name": "address",
+            "value": "",
+            "description": "Customer address",
+            "disabled": true
+        },
+        {
+            "name": "city",
+            "value": "",
+            "description": "City for the customer's address",
+            "disabled": true
+        },
+        {
+            "name": "postal_code",
+            "value": "",
+            "description": "Postal code for the customer's address",
+            "disabled": true
+        },
+        {
+            "name": "province",
+            "value": "",
+            "description": "Province for the customer's address",
+            "disabled": true
+        },
+        {
+            "name": "account_number",
+            "value": "",
+            "description": "IBAN number",
+            "disabled": true
+        },
+        {
+            "name": "representative",
+            "value": "",
+            "description": "If the customer is a company, the name of its representative",
+            "disabled": true
+        },
+        {
+            "name": "comments",
+            "value": "",
+            "description": "Comments for this customer",
+            "disabled": true
+        },
+        {
+            "name": "voucher",
+            "value": "",
+            "description": "Kit Digital voucher code",
+            "disabled": true
+        },
+        {
+            "name": "voucher_granting_date",
+            "value": "",
+            "description": "Kit Digital voucher code granting date",
+            "disabled": true
+        },
+        {
+            "name": "has_representative",
+            "value": "",
+            "description": "True if the customer has signed the 'Representación voluntaria' document",
+            "disabled": true
+        }
+    ],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzI1NTIxNTU5LCJleHAiOjIzMjU1MjE0OTksIm5iZiI6MTcyNTUyMTU1OSwianRpIjoiT04yZ0JKWE1wVUxQUWFSZyIsInN1YiI6IjEwIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInVzZXIiOnsiaWQiOjEwLCJuYW1lIjoiVG9tw6FzIEdlbmVyZWxvIiwiZW1haWwiOiJ0b21hc2dlbmVyZWxvQGVjb21wdXRlci5lcyIsImxldmVsIjoiMTAiLCJjcmVhdGVkX2F0IjoiMjAyNC0wNy0yNFQwNjo1OToyMC4wMDAwMDBaIiwidXBkYXRlZF9hdCI6IjIwMjQtMDctMjRUMDY6NTk6MjAuMDAwMDAwWiIsIm5pZiI6bnVsbCwicGhvbmUiOm51bGwsImNvbnRhY3QiOm51bGwsImNpdHkiOm51bGwsImFncmVlbWVudHMiOm51bGwsInNpZ25lZF9jb250cmFjdCI6MCwiY29udHJhY3Rfc2VudCI6MCwibWFuYWdpbmdfdXNlciI6bnVsbCwiY3VzdG9tX3VzZXJfY29tbWlzc2lvbiI6bnVsbCwicm9sZV9uYW1lIjoiQWRtaW5pc3RyYWRvciJ9fQ.AS8LQ4EVNxj1rhYn0tEQ2v6JscutkJAGOQM-fKUXFq4"
+    },
+    "sortOrder": 5,
+    "pathParameters": [
+        {
+            "name": "id",
+            "value": "1",
+            "description": "Customer ID"
+        }
+    ]
+}

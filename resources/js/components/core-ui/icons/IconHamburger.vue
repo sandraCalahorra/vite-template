@@ -1,0 +1,17 @@
+<template>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" fill="currentColor">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48"
+            d="M88 152h336"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48"
+            d="M88 256h336"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48"
+            d="M88 360h336"></path>
+    </svg>
+
+</template>
+
+<script>
+export default {
+    name: "IconHamburger"
+}
+</script>

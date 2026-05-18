@@ -1,0 +1,22 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/milestones/{id}",
+    "method": "PATCH",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzIzNzk0OTU2LCJleHAiOjE3MjM4ODEzNTYsIm5iZiI6MTcyMzc5NDk1NiwianRpIjoiMHZSdEN5ZEdHakpNaUcyeCIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwidXNlciI6eyJpZCI6MSwibmFtZSI6IlJvb3QiLCJlbWFpbCI6InJvb3RAZWNvbXB1dGVyLmVzIiwibGV2ZWwiOiIwIiwiY3JlYXRlZF9hdCI6bnVsbCwidXBkYXRlZF9hdCI6bnVsbCwibmlmIjpudWxsLCJwaG9uZSI6bnVsbCwiY29udGFjdCI6bnVsbCwiY2l0eSI6bnVsbCwiYWdyZWVtZW50cyI6bnVsbCwic2lnbmVkX2NvbnRyYWN0IjowLCJjb250cmFjdF9zZW50IjowLCJyb2xlX25hbWUiOiJTdXBlcmFkbWluIn19.kSM5uf0h5w8WUY2ATuEcyIBaxHV3QSaI1aePvziEF2I"
+    },
+    "sortOrder": 5,
+    "pathParameters": [
+        {
+            "name": "id",
+            "value": "1",
+            "description": "Milestone ID"
+        }
+    ]
+}

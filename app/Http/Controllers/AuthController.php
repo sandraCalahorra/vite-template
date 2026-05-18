@@ -1,0 +1,133 @@
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\DB;
+
+class AuthController extends Controller
+{
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    }
+    /**
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string|min:4',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        if (! $token = auth()->attempt($validator->validated())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        return $this->createNewToken($token);
+    }
+    /**
+     * Register a User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request) {
+        $restrict = 'Not allowed, nice try :)';
+        $user_object = $request->attributes->get('user_object');
+
+        if ($user_object->level !== null) {
+            if($user_object->level >= 20) {
+                return response()->json(['error' => $restrict], 401);;
+            } else if ($user_object->level >= 10 && $request->level < $user_object->level){
+                return response()->json(['error' => $restrict], 401);;
+            }
+        } else if (!$user_object) {
+            return response()->json(['error' => $restrict], 401);;
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|min:4',
+            'level' => 'required|string',
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $user = User::create(array_merge(
+                    $validator->validated(),
+                    ['password' => bcrypt($request->password)]
+                ));
+        return response()->json([
+            'message' => 'User successfully registered',
+            'user' => $user
+        ], 201);
+    }
+
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout() {
+        if (auth()->check()) {
+            auth()->logout();
+            return response()->json(['message' => 'User successfully signed out']);
+        } else {
+            return response()->json(['message' => 'User is already logged out'], 200);
+        }
+    }
+    /**
+     * Refresh a token.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh() {
+        return $this->createNewToken(auth()->refresh());
+    }
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function checkUser() {
+        return response()->json(auth()->user());
+    }
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function createNewToken($token){
+        $user = auth()->user();
+        // Change the user value added in the token
+        $queryUser= User::select("users.*", DB::raw("roles.name as role_name"))->leftJoin('roles','roles.level', 'users.level')->find($user->id);
+
+        // Additional user properties to include in the token payload
+        $additionalPayload = [
+            'user' => $queryUser,
+        ];
+
+        $token = JWTAuth::customClaims($additionalPayload)->fromUser($queryUser);
+
+        return response()->json([
+            'token' => $token,
+            'user' => $queryUser,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+        ]);
+    }
+
+}

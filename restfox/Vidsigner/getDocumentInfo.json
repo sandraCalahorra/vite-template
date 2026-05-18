@@ -1,0 +1,22 @@
+{
+    "_type": "request",
+    "url": "{{host}}/api/vidsigner/getDocumentInfo/{docGUI}",
+    "method": "GET",
+    "body": {
+        "mimeType": "No Body"
+    },
+    "headers": [],
+    "parameters": [],
+    "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ2aWRjbG91ZCIsImFkbWluIjoiRmFsc2UiLCJzdWIiOiJkMGUzM2UzYi1hMzg2LTRkM2QtOTJhNy1lMjlmMjI4ZjkzYTIiLCJyb2xlIjoic3Vic2NyaXB0aW9uIiwiY2xpZW50IjoiRWNvbXB1dGVyQ2xpZW50IiwibmV3X2VudGl0eSI6IlRydWUiLCJlbnYiOiJQUk9EVUNUSU9OIiwibmJmIjoxNzI0OTE3NTA1LCJleHAiOjE3MjQ5MjExMDUsImlhdCI6MTcyNDkxNzUwNX0.3W3hdegataJDh4vKV98DNWAuFKoCQArm1M9aNBFC-jw"
+    },
+    "sortOrder": 2,
+    "pathParameters": [
+        {
+            "name": "docGUI",
+            "value": "dedf17b6-6896-45fd-b8a1-aa426bfcadd9",
+            "description": "VidSigner docGUI code"
+        }
+    ]
+}
