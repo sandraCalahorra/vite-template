@@ -5,7 +5,7 @@
 # Laravel + Vue 3 + Tailwind CSS 3 
 
 ## Developers Data
- - Name & Surname: Liviu-Adrian Dodan
+ - Name & Surname: Sandra Calahorra
 
 ### npm
 
